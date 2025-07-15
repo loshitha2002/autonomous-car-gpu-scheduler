@@ -1,7 +1,6 @@
-#include <stdio.h>
 #include "scheduler.h"
+#include <stdio.h>
 
-// Task names for display
 const char* TASK_NAMES[NUM_TASKS] = {
     "Perception (Sensor Fusion)",
     "Localization (Position Estimation)",
@@ -10,8 +9,7 @@ const char* TASK_NAMES[NUM_TASKS] = {
     "Control (Actuator Commands)"
 };
 
-// Select the task with the most remaining time (LPT)
-int select_task(Task* tasks) {
+static int select_task(Task* tasks) {
     int selected = -1;
     int max_remain = 0;
     for (int i = 0; i < NUM_TASKS; ++i) {
@@ -23,19 +21,17 @@ int select_task(Task* tasks) {
     return selected;
 }
 
-void schedule(int* task_durations) {
+void schedule(const int* task_durations) {
     Task tasks[NUM_TASKS];
     GPU gpus[NUM_GPUS];
     int done = 0, time = 0, total_work = 0;
 
-    // Init tasks
     for (int i = 0; i < NUM_TASKS; ++i) {
         tasks[i].id = i;
         tasks[i].remaining = task_durations[i];
         tasks[i].total = task_durations[i];
         total_work += task_durations[i];
     }
-    // Init GPUs
     for (int i = 0; i < NUM_GPUS; ++i) {
         gpus[i].id = i;
         gpus[i].busy_until = 0;
@@ -49,7 +45,6 @@ void schedule(int* task_durations) {
         printf("  Task %d: %s (%d ms)\n", i, TASK_NAMES[i], tasks[i].total);
     }
 
-    // Simulation loop
     while (done < NUM_TASKS) {
         printf("\nTime: %d ms\n", time);
         for (int g = 0; g < NUM_GPUS; ++g) {

@@ -1,53 +1,49 @@
-# Autonomous Car Task Scheduler (LPT)
+# Autonomous Car GPU Scheduler
 
-## Description
-This project simulates scheduling of key autonomous car modules (Perception, Localization, etc.) on three GPUs using the Longest Processing Time (LPT) heuristic in C.
+This project simulates a GPU scheduling algorithm (Longest Processing Time first, LPT) for an autonomous car's main computation modules.
 
-You can view the results in the **console** or via a **graphical SDL visualization**.
+## Modules simulated:
+- Perception (Sensor Fusion)
+- Localization (Position Estimation)
+- Object Detection
+- Path Planning
+- Control (Actuator Commands)
 
----
+## Features
+- Assigns the heaviest (longest) remaining module to the next available GPU.
+- Console output shows scheduling decisions and progress.
+- Reports makespan and theoretical lower bound for optimality reference.
 
-## How to Compile and Run
+## Build Instructions
 
-### Console Version
+**Requirements:**  
+- GCC or any standard C compiler
+- Make (recommended)
+
+**Build:**
 ```sh
-gcc main.c scheduler.c -o scheduler
+make
+```
+
+**Run:**
+```sh
 ./scheduler
 ```
 
-### SDL Visualization
-**Requirements:** SDL2 development libraries  
-On Ubuntu/Debian:  
-```sh
-sudo apt-get install libsdl2-dev
-```
-On Mac:  
-```sh
-brew install sdl2
-```
+## Files
 
-**Build and Run:**
-```sh
-gcc scheduler_sdl.c scheduler.c -o scheduler_sdl -lSDL2
-./scheduler_sdl
-```
+- `main.c` — Entry point, sets up modules and runs scheduler.
+- `scheduler.c` — Scheduling logic and simulation.
+- `scheduler.h` — Data structures and API.
+- `Makefile` — For easy build/clean.
+- `TestPlan.md` — Test cases and expected results.
+- `output.log` — Sample output log.
+- `screenshots/` — Place your screenshots here.
 
----
+## Customization
 
-## Features
-- Schedules 5 key autonomous car tasks on 3 GPUs (LPT heuristic)
-- Console and graphical (SDL) versions
-- Visualizes GPU progress and task assignments
+Edit `main.c` to change module durations or number of GPUs.
 
-## How to Modify Simulation
-Edit the `module_durations` array in `main.c` or `scheduler_sdl.c`.
+## Author
 
-## Test Plan
-
-See `TestPlan.md` for sample input/output checks.
-
-## Sample Output
-
-See `OutputLog.md`.
-
----
+*Your Name Here*
