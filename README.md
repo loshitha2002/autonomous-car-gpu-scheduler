@@ -117,12 +117,6 @@ See [`TestPlan.md`](TestPlan.md) for detailed test scenarios, expected results, 
 
 Visual outputs are provided in the `screenshots/` directory.
 
----
-
-## Author
-
-- **Name:** _[Your Name Here]_
-- **Email:** _[your.email@example.com]_
 
 ---
 
