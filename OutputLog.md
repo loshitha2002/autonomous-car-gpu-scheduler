@@ -12,16 +12,8 @@ Time: 0 ms
   GPU 1 runs [Path Planning] for 50 ms (remaining: 200 ms)
   GPU 2 runs [Localization (Position Estimation)] for 50 ms (remaining: 150 ms)
 
-Time: 50 ms
-  GPU 0 continues [Control (Actuator Commands)] (busy until 50 ms)
-  GPU 1 continues [Path Planning] (busy until 50 ms)
-  GPU 2 continues [Localization (Position Estimation)] (busy until 50 ms)
-
 ...
-
 (All output as produced by your program)
-
 ...
-
 All modules completed at 350 ms
-Theoretical lower bound: 202.00 ms
+Theoretical lower bound: 336.67 ms
