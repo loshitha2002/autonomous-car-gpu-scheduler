@@ -51,10 +51,10 @@ autonomous-car-gpu-scheduler/
 - **fullcode.c** — The complete scheduler logic using LPT for autonomous car modules.
 - **test.c** — Allows the user to input module durations interactively and view results in the terminal.
 - **GUI.c** — Provides a graphical interface for entering durations and visualizing results (library dependencies apply).
-- **Makefile** — Automates build steps (if present).
-- **scheduler.h / scheduler.c** — Modularized code (if present; may be combined into one file in fullcode.c).
-- **output.log** — Example output from simulations.
-- **screenshots/** — Example screenshots from the GUI or console output.
+- **Makefile** — A build automation file for Unix-like environments.
+- **scheduler.c** — This file contains the implementation of the actual scheduling logic.
+- **scheduler.h** - This is a header file that defines the public interface for the scheduler module.
+- **screenshots/** — Example screenshots from the GUI and console output.
 
 ---
 
@@ -134,8 +134,3 @@ Visual outputs are provided in the `screenshots/` directory.
 
 
 
-## License
-
-This project is provided for educational and demonstration purposes.
-
----
