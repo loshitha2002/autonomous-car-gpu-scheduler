@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project simulates a GPU scheduling algorithm for an autonomous vehicle, utilizing the *Longest Processing Time (LPT)* strategy. The scheduler assigns computation modules (tasks) to available GPUs in a way that aims to minimize the overall completion time (makespan). Each module represents a critical function of the autonomous car, such as perception, localization, and control.
+This project simulates a GPU scheduling algorithm for an autonomous vehicle, utilizing the **Longest Processing Time (LPT)** strategy. The scheduler assigns computation modules (tasks) to available GPUs in a way that aims to minimize the overall completion time (makespan). Each module represents a critical function of the autonomous car, such as perception, localization, and control.
 
 The simulation provides clear console output showing scheduling decisions, task progress, and final statistics, making it useful for both academic demonstration and practical understanding of scheduling algorithms.
 
@@ -10,28 +10,28 @@ The simulation provides clear console output showing scheduling decisions, task 
 
 ## Features
 
-- *Modular Design:* Source code is split into logical files for maintainability (main.c, scheduler.c, scheduler.h).
-- *Task Simulation:* Models 5 core autonomous car modules, each with customizable durations.
-- *LPT Scheduling:* Assigns the most demanding (longest remaining) task to each available GPU at every scheduling tick.
-- *Progress Tracking:* Console output details which GPU is running which task, remaining time, and completion notifications.
-- *Performance Metrics:* Reports the makespan (actual completion time) and the theoretical optimal lower bound for comparison.
-- *Easy Customization:* Modify task durations, number of GPUs, or simulation step size as needed.
+- **Modular Design:** Source code is split into logical files for maintainability (`main.c`, `scheduler.c`, `scheduler.h`).
+- **Task Simulation:** Models 5 core autonomous car modules, each with customizable durations.
+- **LPT Scheduling:** Assigns the most demanding (longest remaining) task to each available GPU at every scheduling tick.
+- **Progress Tracking:** Console output details which GPU is running which task, remaining time, and completion notifications.
+- **Performance Metrics:** Reports the makespan (actual completion time) and the theoretical optimal lower bound for comparison.
+- **Easy Customization:** Modify task durations, number of GPUs, or simulation step size as needed.
 
 ---
 
 ## Autonomous Car Modules Simulated
 
-1. *Perception (Sensor Fusion)*
-2. *Localization (Position Estimation)*
-3. *Object Detection*
-4. *Path Planning*
-5. *Control (Actuator Commands)*
+1. **Perception (Sensor Fusion)**
+2. **Localization (Position Estimation)**
+3. **Object Detection**
+4. **Path Planning**
+5. **Control (Actuator Commands)**
 
 ---
 
 ## Folder Structure
 
-
+```
 autonomous-car-gpu-scheduler/
 ├── main.c
 ├── scheduler.c
@@ -41,40 +41,40 @@ autonomous-car-gpu-scheduler/
 ├── TestPlan.md
 ├── output.log
 └── screenshots/
-
+```
 
 ---
 
 ## Build & Usage
 
-### *Prerequisites*
+### **Prerequisites**
 - GCC or compatible C compiler
 - Make utility (recommended for UNIX-like systems)
 
-### *Build the Project*
-sh
+### **Build the Project**
+```sh
 make
+```
 
-
-### *Run the Simulation*
-sh
+### **Run the Simulation**
+```sh
 ./scheduler
+```
 
-
-### *Clean Build Files*
-sh
+### **Clean Build Files**
+```sh
 make clean
-
+```
 
 ---
 
 ## Customization
 
-- *Task Durations:*  
-  Edit the module_durations array in main.c to change the execution time (in milliseconds) of each module.
+- **Task Durations:**  
+  Edit the `module_durations` array in `main.c` to change the execution time (in milliseconds) of each module.
 
-- *Number of GPUs/Tasks:*  
-  Adjust NUM_GPUS and NUM_TASKS in scheduler.h.  
+- **Number of GPUs/Tasks:**  
+  Adjust `NUM_GPUS` and `NUM_TASKS` in `scheduler.h`.  
   Update related arrays in all source files accordingly.
 
 ---
@@ -83,7 +83,7 @@ make clean
 
 A typical output will show module assignments, progress, and completion:
 
-
+```
 Autonomous Robot Car Packing Scheduler (LPT)
 GPUs: 3, Modules: 5
 Modules:
@@ -101,24 +101,25 @@ Time: 0 ms
 ...
 All modules completed at 350 ms
 Theoretical lower bound: 336.67 ms
+```
 
-
-For complete output, see [output.log](output.log).
+For complete output, see [`output.log`](output.log).
 
 ---
 
 ## Test Plan
 
-See [TestPlan.md](TestPlan.md) for detailed test scenarios, expected results, and validation procedures.
+See [`TestPlan.md`](TestPlan.md) for detailed test scenarios, expected results, and validation procedures.
 
 ---
 
 ## Screenshots
 
-Visual outputs are provided in the screenshots/ directory.
-
+Visual outputs are provided in the `screenshots/` directory.
 
 ---
+
+
 
 ## License
 
