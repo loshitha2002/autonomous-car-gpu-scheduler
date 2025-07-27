@@ -39,7 +39,9 @@ autonomous-car-gpu-scheduler/
 ├── Makefile
 ├── README.md
 ├── TestPlan.md
-├── output.log
+├── test.c
+├── Fullcode.c
+├── GUI.c
 └── screenshots/
 ```
 
