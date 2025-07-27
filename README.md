@@ -1,127 +1,142 @@
-# Autonomous Car GPU Scheduler (LPT Simulation)
+# Autonomous Car GPU Scheduler
 
 ## Overview
 
-This project simulates a GPU scheduling algorithm for an autonomous vehicle, utilizing the **Longest Processing Time (LPT)** strategy. The scheduler assigns computation modules (tasks) to available GPUs in a way that aims to minimize the overall completion time (makespan). Each module represents a critical function of the autonomous car, such as perception, localization, and control.
+This repository implements a GPU scheduling simulator for autonomous vehicle modules using the **Longest Processing Time (LPT)** algorithm. The project includes:
 
-The simulation provides clear console output showing scheduling decisions, task progress, and final statistics, making it useful for both academic demonstration and practical understanding of scheduling algorithms.
-
----
-
-## Features
-
-- **Modular Design:** Source code is split into logical files for maintainability (`main.c`, `scheduler.c`, `scheduler.h`).
-- **Task Simulation:** Models 5 core autonomous car modules, each with customizable durations.
-- **LPT Scheduling:** Assigns the most demanding (longest remaining) task to each available GPU at every scheduling tick.
-- **Progress Tracking:** Console output details which GPU is running which task, remaining time, and completion notifications.
-- **Performance Metrics:** Reports the makespan (actual completion time) and the theoretical optimal lower bound for comparison.
-- **Easy Customization:** Modify task durations, number of GPUs, or simulation step size as needed.
+- **fullcode.c**: The main scheduler logic and simulation (console-based).
+- **test.c**: A user input interface for running custom scheduling scenarios via the terminal.
+- **GUI.c**: A graphical interface for running the scheduler (requires additional setup; see below).
 
 ---
 
-## Autonomous Car Modules Simulated
+## Getting Started
 
-1. **Perception (Sensor Fusion)**
-2. **Localization (Position Estimation)**
-3. **Object Detection**
-4. **Path Planning**
-5. **Control (Actuator Commands)**
+### **Requirements**
 
----
-
-## Folder Structure
-
-```
-autonomous-car-gpu-scheduler/
-├── main.c
-├── scheduler.c
-├── scheduler.h
-├── Makefile
-├── README.md
-├── TestPlan.md
-├── output.log
-└── screenshots/
-```
-
----
-
-## Build & Usage
-
-### **Prerequisites**
 - GCC or compatible C compiler
-- Make utility (recommended for UNIX-like systems)
+- [Optional for GUI] Simple graphics library (e.g., GTK, SDL, or similar; see GUI.c for details)
+- Make utility (recommended)
 
-### **Build the Project**
+---
+
+## Usage Instructions
+
+### **1. Compile the Programs**
+
+Open your terminal in the project folder.
+
+#### **A. Compile the main scheduler (fullcode.c):**
+
 ```sh
-make
+gcc fullcode.c -o scheduler
 ```
 
-### **Run the Simulation**
+#### **B. Compile the user input test program (test.c):**
+
+```sh
+gcc test.c -o test
+```
+
+#### **C. Compile the GUI program (GUI.c):**
+
+If your GUI uses a library such as GTK or SDL, you need to link against it. Example (for GTK):
+
+```sh
+gcc GUI.c -o gui `pkg-config --cflags --libs gtk+-3.0`
+```
+
+> **Note:** Adjust the compile command based on the graphics library used in `GUI.c`.  
+> If you do not have a GUI library installed, you can skip this step and use the console programs.
+
+---
+
+### **2. Run the Programs**
+
+#### **A. Run the main scheduler (console simulation):**
+
 ```sh
 ./scheduler
 ```
 
-### **Clean Build Files**
+#### **B. Run the user input program:**
+
 ```sh
-make clean
+./test
+```
+You will be prompted to enter durations for each module, and the scheduler will output the schedule and makespan.
+
+#### **C. Run the GUI program:**
+
+```sh
+./gui
+```
+> **Note:** GUI usage instructions may vary. Refer to comments in `GUI.c` for specific details.
+
+---
+
+## File Descriptions
+
+- **fullcode.c** — The complete scheduler logic using LPT for autonomous car modules.
+- **test.c** — Allows the user to input module durations interactively and view results in the terminal.
+- **GUI.c** — Provides a graphical interface for entering durations and visualizing results (library dependencies apply).
+- **Makefile** — Automates build steps (if present).
+- **scheduler.h / scheduler.c** — Modularized code (if present; may be combined into one file in fullcode.c).
+- **output.log** — Example output from simulations.
+- **screenshots/** — Example screenshots from the GUI or console output.
+
+---
+
+## Example Usage
+
+**Console User Input (`test.c`):**
+```
+Enter durations for each module (in ms):
+  Perception (Sensor Fusion): 100
+  Localization (Position Estimation): 250
+  Object Detection: 120
+  Path Planning: 200
+  Control (Actuator Commands): 300
+
+Autonomous Robot Car Packing Scheduler (LPT)
+GPUs: 3, Modules: 5
+...
+All modules completed at 350 ms
+Theoretical lower bound: 323.33 ms
 ```
 
 ---
 
 ## Customization
 
-- **Task Durations:**  
-  Edit the `module_durations` array in `main.c` to change the execution time (in milliseconds) of each module.
-
-- **Number of GPUs/Tasks:**  
-  Adjust `NUM_GPUS` and `NUM_TASKS` in `scheduler.h`.  
-  Update related arrays in all source files accordingly.
+- **Change Module Durations:**  
+  Edit values in `fullcode.c`, or use `test.c` for interactive input.
+- **Change Number of GPUs or Modules:**  
+  Adjust `NUM_GPUS` and `NUM_TASKS` in your source files.
 
 ---
 
-## Output Example
+## Troubleshooting
 
-A typical output will show module assignments, progress, and completion:
-
-```
-Autonomous Robot Car Packing Scheduler (LPT)
-GPUs: 3, Modules: 5
-Modules:
-  Task 0: Perception (Sensor Fusion) (70 ms)
-  Task 1: Localization (Position Estimation) (200 ms)
-  Task 2: Object Detection (190 ms)
-  Task 3: Path Planning (250 ms)
-  Task 4: Control (Actuator Commands) (300 ms)
-
-Time: 0 ms
-  GPU 0 runs [Control (Actuator Commands)] for 50 ms (remaining: 250 ms)
-  GPU 1 runs [Path Planning] for 50 ms (remaining: 200 ms)
-  GPU 2 runs [Localization (Position Estimation)] for 50 ms (remaining: 150 ms)
-
-...
-All modules completed at 350 ms
-Theoretical lower bound: 336.67 ms
-```
-
-For complete output, see [`output.log`](output.log).
-
----
-
-## Test Plan
-
-See [`TestPlan.md`](TestPlan.md) for detailed test scenarios, expected results, and validation procedures.
-
----
-
-## Screenshots
-
-Visual outputs are provided in the `screenshots/` directory.
-
+- If you get `gcc: command not found`, install GCC via your package manager.
+- For GUI issues, ensure required libraries are installed and linked.
+- If you encounter permission errors, run `chmod +x scheduler test gui` to make binaries executable.
 
 ---
 
 ## License
 
-This project is provided for educational and demonstration purposes.
+This project is released for educational and research purposes.
 
 ---
+
+## Authors
+
+- [Your Name Here]
+- [Contributors]
+
+---
+
+## Screenshots
+
+See the `screenshots/` directory for sample outputs.
